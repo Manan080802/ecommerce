@@ -14,9 +14,7 @@ const createTables = async () => {
             lastName VARCHAR(100) NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL,
             phoneNumber VARCHAR(20), 
-            profile VARCHAR(255),
             gender VARCHAR(10) CHECK (gender IN ('${constants.MALE}','${constants.FEMALE}', '${constants.OTHER}')), 
-            dob DATE,
             password VARCHAR(255) NOT NULL,
             role VARCHAR(50) DEFAULT '${constants.USER}', 
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

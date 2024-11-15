@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import cookieParser from "cookie-parser";
 import httpStatus from "http-status"
 import ApiError from "./util/ApiError.js";
 import { errorConverter,errorHandler } from "./middleware/error.js";
@@ -9,6 +10,7 @@ import auth from "./routes/auth.js"
 dotenv.config({})
 const app = express()
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/auth",auth)
 app.use((req, res, next) => {
