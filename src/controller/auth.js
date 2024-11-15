@@ -29,3 +29,13 @@ export const signUp = catchAsync(async(req,res)=>{
     
     throw new ApiError(httpStatus.NOT_FOUND,userMessage.U03,"U03")
 })
+
+export const logout = catchAsync(async(req,res)=>{
+    const {token}= req.cookies
+    if(token)
+    {
+        return res.status(httpStatus.OK).cookie("token", null, { expires: new Date(Date.now()) }).send(Utils.success("",userMessage.U04,"U04"))
+    }
+    throw new ApiError(httpStatus.NOT_FOUND,userMessage.U05,"U05")
+
+})
