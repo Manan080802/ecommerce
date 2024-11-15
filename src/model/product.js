@@ -11,3 +11,7 @@ export const addProducts = (req)=>{
         [name,price,stock_quantity]
       );
 }
+
+export const checkProductId = (id)=>{
+    return pool.query('SELECT * FROM Products WHERE id = $1',[id])
+}

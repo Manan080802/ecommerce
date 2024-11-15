@@ -17,7 +17,6 @@ export const signUp = catchAsync(async(req,res)=>{
     }
     
     const hashPassword =await passwordFunction.passwordEncryption(password)
-    console.log(hashPassword)
     req.body.password = hashPassword
     const result = await addUser(req)
     if(result.rows[0])
