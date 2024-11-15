@@ -29,6 +29,24 @@ export const signUp = catchAsync(async(req,res)=>{
     
     throw new ApiError(httpStatus.NOT_FOUND,userMessage.U03,"U03")
 })
+export const login = catchAsync(async(req,res)=>{
+    const {password,email} = req.body
+    const isEmail = await checkEmail(email)
+    if(!isEmail.rows[0])
+    {
+        throw new ApiError(httpStatus.NOT_FOUND,userMessage.U06,"U06")
+    }
+    const passwordCheck = await passwordFunction.passwordDecryption(password,isEmail.rows[0].password)
+    if(!passwordCheck)
+    {
+        throw new ApiError(httpStatus.NOT_FOUND,userMessage.U07,"U07")
+    }
+
+    const token = await createToken(isEmail.rows[0].id)
+    delete isEmail.rows[0].password
+    return res.status(httpStatus.OK).cookie("token",token).send(Utils.success(isEmail.rows[0],userMessage.U08,"U08"))
+
+})
 
 export const logout = catchAsync(async(req,res)=>{
     const {token}= req.cookies

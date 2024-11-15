@@ -9,7 +9,12 @@ const passwordEncryption =async (password)=>{
     return encryption
 
 }
+
+const passwordDecryption  = async(password,userPassword)=>{
+    return bcrypt.compare(password,userPassword)
+}
 export default 
 {
-    passwordEncryption
+    passwordEncryption,
+    passwordDecryption
 }
