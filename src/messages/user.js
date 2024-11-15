@@ -6,5 +6,7 @@ export const userMessage =  {
     "U05":"User is already logout.",
     "U06":"User is not found.",
     "U07":"User's email and password is not matched.",
-    "U08":"User is successfully login"
+    "U08":"User is successfully login",
+    "U09":"please the login.",
+    "U10":"User has not access."
 }

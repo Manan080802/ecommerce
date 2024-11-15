@@ -12,3 +12,8 @@ export const addUser = (req)=>{
         [firstName, lastName, gender, email, password, phoneNumber]
       );
 }
+export const checkId = (id)=>{
+    return pool.query('SELECT * FROM Users WHERE id = $1', [id])
+
+
+}
