@@ -7,6 +7,7 @@ import { errorConverter,errorHandler } from "./middleware/error.js";
 import auth from "./routes/auth.js"
 import product from "./routes/product.js"
 import cart from "./routes/cart.js"
+import order from "./routes/order.js"
 
 
 dotenv.config({})
@@ -17,6 +18,7 @@ app.use(cookieParser())
 app.use("/auth",auth)
 app.use("/product",product)
 app.use("/cart",cart)
+app.use("/order",order)
 
 app.use((req, res, next) => {
     next(new ApiError(httpStatus.NOT_FOUND, "Not Found"));

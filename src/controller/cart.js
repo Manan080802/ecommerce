@@ -42,9 +42,9 @@ export const checkOut = catchAsync(async(req,res)=>{
     const userData = req.user
     const cartItems = await cartDetail(userData.id)
 
-    if(cartItems.rows.length ==0)
+    if(cartItems.rows.length == 0)
     {
-        throw new ApiError(httpStatus.NO_CONTENT,cartMessage.C03,"C03")
+        throw new ApiError(httpStatus.NOT_FOUND,cartMessage.C03,"C03")
     }
 
     let totalAmount = 0

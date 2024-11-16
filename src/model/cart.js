@@ -24,3 +24,9 @@ export const cartDetail = (user_id)=>{
       );
 
 }
+
+export const deleteCart =(user_id)=>{
+    return pool.query(
+        'DELETE FROM Cart WHERE user_id = $1', [user_id]
+    )
+}

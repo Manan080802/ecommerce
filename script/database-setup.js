@@ -32,7 +32,7 @@ const createTables = async () => {
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES Users(id),
         total_amount DECIMAL NOT NULL,
-        status VARCHAR(50) DEFAULT 'pending',
+        status VARCHAR(50) DEFAULT 'done',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
       
