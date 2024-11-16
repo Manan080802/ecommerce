@@ -1,5 +1,5 @@
 export const checkQuantity = (product,quantity)=>{
-    if(product.stock_quantity<quantity)
+    if(product<quantity)
     {
         return false
     }
