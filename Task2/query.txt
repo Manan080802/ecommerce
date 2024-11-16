@@ -1,0 +1,96 @@
+1. Find User wise - product-wise ordering quantity with total item value
+select users.id,users.email,Products.id,Products.name,sum(Order_items.quantity),sum(Order_items.item_value)  from users
+
+join
+	Orders
+on
+	users.id = orders.user_id
+join
+	Order_Items
+on
+	orders.id = Order_Items.order_id
+join
+	products
+on 
+	Order_items.product_id = products.id
+Group by
+	Products.id,users.id
+order by
+	users.id,products.id
+
+
+
+2.Weekly Orders analysis for the first quarter of 2024
+##note: I do not have information for the first quarter of 2024. However, I have prepared a query to calculate the number of orders per minute
+SELECT 
+    EXTRACT(MINUTE  FROM  Orders.created_at) AS minute_number,
+    COUNT( Orders.id) AS total_orders,
+    SUM( Orders.total_amount) AS total_sales
+FROM 
+    Orders
+WHERE 
+    Orders.created_at >= '2024-11-16 01:00:00' AND Orders.created_at < '2024-11-16 23:59:00'
+GROUP BY 
+    minute_number
+ORDER BY 
+    minute_number;
+
+-------Weekly data of first quarter of 2024---------------------
+SELECT 
+    EXTRACT(WEEK  FROM  Orders.created_at) AS week_number,
+    COUNT( Orders.id) AS total_orders,
+    SUM( Orders.total_amount) AS total_sales
+FROM 
+    Orders
+WHERE 
+    Orders.created_at >= '2024-01-01' AND Orders.created_at < '2024-03-31'
+GROUP BY 
+    week_number
+ORDER BY 
+    week_number;
+
+
+
+
+3.Retrieve the Product name and No. of Orders from Sales. Exclude products with fewer than 5 Orders
+SELECT 
+    Products.name,count(Order_items.id)  
+FROM 
+    Products
+Join
+    Order_Items
+on
+    Products.id = Order_Items.product_id
+GROUP BY
+	Products.name
+HAVING
+	count(Order_items.id)>5
+order by
+	count(Order_items.id) DESC
+
+
+
+
+
+4.Find the products that are sold more than 7 times or have not sold yet in the first quarter of 2024
+SELECT 
+    Products.name,count(Order_items.id)  
+FROM 
+    Products
+Join
+    Order_Items
+on
+    Products.id = Order_Items.product_id
+JOIN
+	Orders
+on
+	Order_Items.order_id = Orders.id
+WHERE
+	Orders.created_at >= '2024-01-01' AND Orders.created_at < '2024-04-01'
+GROUP BY
+	Products.name
+HAVING 
+  COUNT(Order_Items.order_id) > 7 OR COUNT(Order_Items.order_id) = 0
+order by
+	count(Order_items.id) DESC
+ 
