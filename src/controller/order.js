@@ -1,7 +1,7 @@
 import { cartMessage } from "../messages/cart.js";
 import { productMessage } from "../messages/product.js";
 import { cartDetail, deleteCart } from "../model/cart.js";
-import { createOrder, orderDetail, updateStoke } from "../model/order.js";
+import { createOrder, getAllData, orderDetail, updateStoke } from "../model/order.js";
 import ApiError from "../util/ApiError.js";
 import { catchAsync } from "../util/catchAsync.js";
 import { checkQuantity } from "../util/quantity.js";
@@ -38,4 +38,10 @@ export const placeOrder = catchAsync(async (req,res)=>{
  
    return res.status(httpStatus.OK).send(Utils.success({},orderMessage.O01,"O01"))
 
+})
+
+export const getAllOrder = catchAsync(async (req,res)=>{
+    const user_id = req.user.id
+    const result = await getAllData(user_id)
+    res.status(httpStatus.OK).send(Utils.success(result.rows,orderMessage.O02,"O02"))
 })
