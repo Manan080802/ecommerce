@@ -1,16 +1,25 @@
-DB_USER=manan
+#create the db
+DB_USER=ecom
 DB_HOST=localhost
-DB_NAME=manan
-DB_PASS=manan
-DB_PORT=5432
-JWT_SECRET=your_jwt_secret
+DB_NAME=ecom
+DB_PASS=ecom
 
+JWT_SECRET=your_jwt_secret
+#first connectin db
 DB_CONN_USER=postgres
 DB_CONN_HOST=localhost
 DB_CONN_NAME=postgres
 DB_CONN_PASS=admin
 
-
+# db port
 DB_PORT=5432
-
+#server port
 PORT=3000
+#admin data add
+FIRSTNAME=admin
+LASTNAME=admin
+EMAIL=admin@yopmail.com 
+PASSWORD=Admin@123
+ROLE=admin
+#password
+ROUND=2 
