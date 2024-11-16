@@ -8,7 +8,7 @@ export const createOrder =(user_id,total_amount)=>{
 
 export const orderDetail = (item,order_id)=>{
     return pool.query('INSERT INTO Order_Items (order_id, product_id, quantity, item_value) VALUES ($1, $2, $3, $4)',
-        [order_id, item.product_id, item.quantity, item.price])
+        [order_id, item.product_id, item.quantity, item.price*item.quantity])
 }
 
 export const updateStoke =(item_quantity,product_id)=>{
@@ -26,7 +26,7 @@ export const getAllData = (user_id)=>{
         json_build_object(
           'product_name', p.name,
           'quantity', oi.quantity,
-          'price', oi.item_value * oi.quantity
+          'price', oi.item_value 
         )
       ) AS products
     FROM Orders o
